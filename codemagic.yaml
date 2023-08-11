@@ -1,0 +1,24 @@
+workflows:
+  build:
+    name: Build and Test
+    scripts:
+      - echo "Installing dependencies"
+      - flutter pub get
+      - echo "Running tests"
+      - flutter test
+      - echo "Building app"
+      - flutter build ios --release --no-codesign
+    environment:
+      FLUTTER_VERSION: "2.8.1"
+      XCODE_VERSION: "13.2.1"
+    publishing:
+      app-store:
+        release-channel: "stable"
+        app-name: "My CarPlay App"
+        app-version: "1.0.0"
+        build-number: "1"
+        app-icon: "assets/icon.png"
+        app-splash: "assets/splash.png"
+        signing-files:
+          - "my_app.p12"
+          - "my_app.mobileprovision"
